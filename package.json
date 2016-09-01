@@ -1,0 +1,31 @@
+{
+  "name": "uploadpage",
+  "version": "1.0.0",
+  "description": "Assignment(file) uploading system for school.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/110EIm/Chuncms-UploadPage.git"
+  },
+  "keywords": [
+    "file",
+    "upload"
+  ],
+  "author": "110EIm",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/110EIm/Chuncms-UploadPage/issues"
+  },
+  "homepage": "https://github.com/110EIm/Chuncms-UploadPage#readme",
+  "dependencies": {
+    "async": "^2.0.1",
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "pug": "^2.0.0-beta6",
+    "serve-favicon": "^2.3.0"
+  }
+}
