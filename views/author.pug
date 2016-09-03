@@ -1,0 +1,20 @@
+extends layout
+
+append body
+    div(id='particles')
+        canvas(class='pg-canvas', width='709', height='604', style='display: block')
+
+
+
+append scripts
+    script(src='resources/js/jquery.particleground.min.js')
+    script(type='text/javascript').
+        document.addEventListener('DOMContentLoaded', function () {
+            particleground(document.getElementById('particles'), {
+                dotColor: '#5cbdaa',
+                lineColor: '#5cbdaa',
+                density: 6000
+            });
+            var intro = document.getElementById('intro');
+            intro.style.marginTop = - intro.offsetHeight / 2 + 'px';
+        }, false);
