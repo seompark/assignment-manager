@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 
 var path = require('path');
 var fs = require('fs');
@@ -10,6 +11,7 @@ var index = require('./routes/index');
 var author = require('./routes/author');
 
 global.students = JSON.parse(fs.readFileSync('./students.json'), 'w+');
+global.config = require('./config');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -20,6 +22,11 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(bodyParser.json());
+app.use(session({
+    secret: global.config.secret,
+    resave: false,
+    saveUninitialized: false
+}));
 
 app.use('/', index);
 app.use('/author', author);
