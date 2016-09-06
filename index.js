@@ -1,14 +1,19 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const expressValidator = require('express-validator');
 
-var path = require('path');
-var fs = require('fs');
+const path = require('path');
+const fs = require('fs');
+
+const Validator = require('./sources/Validator');
 
 var index = require('./routes/index');
 var author = require('./routes/author');
+var login = require('./routes/login');
+var register = require('./routes/register');
 
 global.students = JSON.parse(fs.readFileSync('./students.json'), 'w+');
 global.config = require('./config');
@@ -27,8 +32,20 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+app.use(expressValidator({
+    customValidator: {
+        isAllowedLength: studentNumber => {
+            return Validator.isAllowedLength();
+        },
+        isAlreadyRegistered: studentNuber => {
+            return Validator.isAlreadyRegistered();
+        }
+    }
+}));
 
 app.use('/', index);
 app.use('/author', author);
+app.use('/login', login);
+//app.use('/register', register);
 
 app.listen(app.get('port'), () => console.log(`Listening on port ${app.get('port')}`));

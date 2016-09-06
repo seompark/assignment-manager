@@ -1,17 +1,11 @@
 module.exports = class {
-    /**
-     * @description id를 생성자로 받습니다.
-     * @param {string} id
-     */
-    constructor(id) {
-        this.id = id;
-    }
 
     /**
      * @description id의 길이를 체크합니다.
+     * @param {string} id
      * @return {boolean}
      */
-    isAllowedLength() {
+    static isAllowedLength(id) {
         if (!typeof(id) === 'string') {
             return false;
         }
@@ -23,16 +17,19 @@ module.exports = class {
                 return global.config.lengthOfId['2'] === id.length;
                 break;
             case 3: // 3학년
-                return global.config.lengthofId['3'] === id.length;
+                return global.config.lengthOfId['3'] === id.length;
                 break;
+            default:
+                return false;
         }
     }
 
     /**
      * @description 이미 회원가입 된 아이디가 아닌지 확인합니다.
+     * @param {string} id
      * @return {boolean}
      */
-    isAlreadyRegistered() {
+    static isAlreadyRegistered(id) {
         if (global.students[id] instanceof Object) {
             return false;
         }

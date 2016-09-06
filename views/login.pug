@@ -1,0 +1,19 @@
+extends page
+
+append body
+	.container
+		div(class='z-depth-1 grey lighten-4 row', style='display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;')
+			form(class='col s12', metod='post')
+				.row
+					.col.s12
+				.row
+					.input-field.col.s12
+						input(class='validate', type='email', name='email', id='email')
+						label(for='email') Enter your email
+				.row
+					.input-field.col.s12
+						input(class='validate', type='password', name='password', id='password')
+						label(for='password') Enter your password
+					label(style='float: right;')
+						a(class='pink-text', href='#')
+							b Forgot Pasword?

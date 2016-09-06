@@ -6,7 +6,7 @@ var sort = require('sort-json');
  */
 module.exports.saveStudent = () => {
     let fs = require('fs');
-    var sortedStudents = sort(global.students);
+    let sortedStudents = sort(global.students);
     fs.writeFile('./students.json', JSON.stringify(global.students, null, 4), 'utf-8');
 	return sortedStudents;
 }
