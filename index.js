@@ -35,10 +35,10 @@ app.use(session({
 app.use(expressValidator({
     customValidator: {
         isAllowedLength: studentNumber => {
-            return Validator.isAllowedLength();
+            return Validator.isAllowedLength(studentNumber);
         },
-        isAlreadyRegistered: studentNuber => {
-            return Validator.isAlreadyRegistered();
+        isAlreadyRegistered: studentNumber => {
+            return Validator.isAlreadyRegistered(studentNumber);
         }
     }
 }));
