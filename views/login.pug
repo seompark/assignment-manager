@@ -1,35 +1,31 @@
 extends layout
 
 append body
-    .section
     main
         center
-            img.responsive-img(style='width: 250px;', src='http://i.imgur.com/ax0NCsK.gif')
-            .section
-            h5.teal-text Please, login into your account
-            .section
+            br
+            h3.teal-text.text-lighten-1 어서와
+            br
             .container
-                .z-depth-1.grey.lighten-4.row(style='display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;')
+                .z-depth-1.grey.lighten-4.row(style='display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE')
                     form.col.s12(method='post')
                         .row
                             .col.s12
                         .row
                             .input-field.col.s12
-                                input#number.validate(type='email', name='email')
-                                label(for='number') Enter your email
+                                input#text.validate(type='text', name='text')
+                                label(for='text') 학번
                         .row
                             .input-field.col.s12
                                 input#password.validate(type='password', name='password')
-                                label(for='password') Enter your password
-                            label(style='float: right;')
+                                label(for='password') 비밀번호
+                            label(style='float: right')
                                 a.pink-text(href='#!')
-                                    b Forgot Password?
+                                    b 비밀번호를 잊으셨나요?
                         br
                         center
                             .row
                                 button.col.s12.btn.btn-large.waves-effect.teal(type='submit', name='btn_login') Login
-            a(href='#!') Create account
-        .section
-        .section
-
+            a.teal-text(href='#!') 회원가입
 append stylesheets
+    link(href='/resources/css/login.css', type='text/css', rel='stylehseet')
