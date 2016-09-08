@@ -46,6 +46,6 @@ app.use(expressValidator({
 app.use('/', index);
 app.use('/author', author);
 app.use('/login', login);
-//app.use('/register', register);
+app.use('/register', register);
 
 app.listen(app.get('port'), () => console.log(`Listening on port ${app.get('port')}`));
