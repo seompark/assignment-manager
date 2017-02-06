@@ -1,8 +1,8 @@
-var router = require('express').Router();
+const router = require('express').Router();
 
 router.get('/', (req, res) => {
     res.render('register', {
-        title: '춘천중학교 과제 제출'
+        title: global.config.name
     });
 });
 

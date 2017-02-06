@@ -12,13 +12,10 @@ module.exports = class {
         switch (this.id[0]) {
             case 1: // 1학년
                 return global.config.lengthOfId['1'] === id.length;
-                break;
             case 2: // 2학년
                 return global.config.lengthOfId['2'] === id.length;
-                break;
             case 3: // 3학년
                 return global.config.lengthOfId['3'] === id.length;
-                break;
             default:
                 return false;
         }
@@ -30,9 +27,6 @@ module.exports = class {
      * @return {boolean}
      */
     static isAlreadyRegistered(id) {
-        if (global.students[id] instanceof Object) {
-            return false;
-        }
-        return true;
+        return !!global.student[id];
     }
 }

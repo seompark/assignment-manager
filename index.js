@@ -4,23 +4,26 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const expressValidator = require('express-validator');
+const updater = require('./sources/updater');
 
 const path = require('path');
 const fs = require('fs');
 
-const Validator = require('./sources/Validator');
+const Validator = require('./sources/validator');
 
-var index = require('./routes/index');
-var author = require('./routes/author');
-var login = require('./routes/login');
-var register = require('./routes/register');
+const index = require('./routes/index');
+const author = require('./routes/author');
+const login = require('./routes/login');
+const register = require('./routes/register');
 
 global.students = JSON.parse(fs.readFileSync('./students.json'), 'w+');
 global.config = require('./config');
 
+updater();
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-app.set('port', process.env.PORT || '80');
+app.set('port', config.port);
 
 app.use(express.static(path.join(__dirname, 'static')));
 app.use(bodyParser.urlencoded({

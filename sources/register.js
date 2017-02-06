@@ -24,6 +24,6 @@ module.exports = (studentNumber, name, password, callback) {
             password: password
         };
         save.saveStudent();
-        callback(null);
+        callback(undefined);
     }
 };

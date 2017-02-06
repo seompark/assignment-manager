@@ -4,7 +4,7 @@ var sort = require('sort-json');
  * @description 유저 정보를 저장합니다.
  * @return {object}
  */
-module.exports.saveStudent = () => {
+module.exports = () => {
     let fs = require('fs');
     let sortedStudents = sort(global.students);
     fs.writeFile('./students.json', JSON.stringify(global.students, null, 4), 'utf-8');

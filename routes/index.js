@@ -1,4 +1,4 @@
-var router = require('express').Router();
+const router = require('express').Router();
 
 router.get('/', (req, res) => {
 	if(!req.session.auth) {
@@ -6,7 +6,7 @@ router.get('/', (req, res) => {
 		return;
 	}
 	res.render('index', {
-		title: '춘천중학교 과제 제출'
+		title: global.config.name
 	});
 });
 
