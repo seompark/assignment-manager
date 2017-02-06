@@ -1,6 +1,6 @@
 {
   "name": "Online Assingment Manager",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Online Assignment Manager",
   "main": "index.js",
   "scripts": {
