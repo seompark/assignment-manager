@@ -11,10 +11,6 @@ module.exports = () => {
         devmode: false
     });
 
-    updater.on('git-clone', function() {
-        console.log("You have a clone of the repository. Use 'git pull' to be up-to-date");
-    });
-
     updater.on('check.up-to-date', (version) => {
         printVersion(version);
         console.log('최신버전입니다.')
@@ -24,7 +20,7 @@ module.exports = () => {
         printVersion(oldVersion);
         console.log('오래된 버전입니다. 자동 업데이트합니다');
         console.log(`새 버전 : ${newVersion}`);
-        updater.fire('download-update');
+        //updater.fire('download-update');
         //TODO print changelogs
     });
 
@@ -46,11 +42,11 @@ module.exports = () => {
 
     updater.on('update.downloaded', () => {
         console.log('다운로드가 끝났습니다. 곧 설치가 시작됩니다.');
-        updater.fire('extract');
+        //updater.fire('extract');
     });
 
     updater.on('update.not-installed', () => {
-        //console.log('다운로드가 끝났습니다. 곧 설치가 시작됩니다.');
+        console.log('다운로드가 끝났습니다. 곧 설치가 시작됩니다.');
         //updater.fire('extract');
     });
 
