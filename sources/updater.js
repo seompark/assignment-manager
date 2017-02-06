@@ -50,8 +50,8 @@ module.exports = () => {
     });
 
     updater.on('update.not-installed', () => {
-        console.log('다운로드가 끝났습니다. 곧 설치가 시작됩니다.');
-        updater.fire('extract');
+        //console.log('다운로드가 끝났습니다. 곧 설치가 시작됩니다.');
+        //updater.fire('extract');
     });
 
     updater.on('update.extracted', () => {
