@@ -1,6 +1,6 @@
 const Updater = require('auto-updater');
 
-module.exports = () => {
+module.exports = () => new Promise((resolve, reject) => {
     const updater = new Updater({
         pathToJson: '',
         autoupdate: true,
@@ -14,6 +14,7 @@ module.exports = () => {
     updater.on('check.up-to-date', (version) => {
         printVersion(version);
         console.log('최신버전입니다.');
+        resolve();
     });
 
     updater.on('check.out-dated', (oldVersion, newVersion) => {
@@ -49,11 +50,11 @@ module.exports = () => {
 
     updater.on('update.extracted', () => {
         console.log('업데이트가 성공적으로 끝났습니다.');
-        console.log('재실행해주세요.');
+        reject('재실행해주세요.');
     });
 
     updater.fire('check');
-};
+});
 
 function printVersion(ver) {
     console.log(`Online Assignment Manager ver. ${ver}`);
@@ -61,4 +62,5 @@ function printVersion(ver) {
     console.log('Email: dreamaker7770@gmail.com');
     console.log('Github: @110EIm');
     console.log('Website: https://murye.io');
+    //TODO beautify
 }

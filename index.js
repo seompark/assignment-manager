@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const logger = require('morgan');
-const updater = require('./src/updater');
+const update = require('./src/updater');
 
 const path = require('path');
 const fs = require('fs');
@@ -34,15 +34,18 @@ function uses(app) {
         saveUninitialized: false
     }));
     app.use(logger('common'));
+    useRouters(app);
 }
 
 function startServer(app) {
-    updater();
-    checkFolders();
-    setting(app);
-    uses(app);
-    useRouters(app);
-    listen(app);
+    update().then(() => {
+        checkFolders();
+        setting(app);
+        uses(app);
+        listen(app);
+    }).catch((err) => {
+        console.log(err);
+    });
 }
 
 function useRouters(app) {
