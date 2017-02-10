@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/110EIm/Online-Assingment-Manager.git"
+    "url": "git+https://github.com/110EIm/Online-Assignment-Manager.git"
   },
   "keywords": [
     "file",
@@ -17,23 +17,21 @@
   "author": "110EIm",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/110EIm/Online-Assingment-Manager/issues"
+    "url": "https://github.com/110EIm/Online-Assignment-Manager/issues"
   },
-  "homepage": "https://github.com/110EIm/Online-Assingment-Manager#readme",
+  "homepage": "https://github.com/110EIm/Online-Assignment-Manager#readme",
   "dependencies": {
-    "async": "^2.0.1",
     "auto-updater": "^1.0.2",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "express-session": "^1.14.1",
-    "express-validator": "^2.20.8",
     "pug": "^2.0.0-beta6",
     "serve-favicon": "^2.3.0",
     "sort-json": "^1.3.0"
   },
   "auto-updater": {
-    "repo": "110EIm/Online-Assingment-Manager",
+    "repo": "110EIm/Online-Assignment-Manager",
     "branch": "master"
   }
 }

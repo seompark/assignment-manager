@@ -1,8 +1,9 @@
 const router = require('express').Router();
+const config = require('../config');
 
 router.get('/', (req, res) => {
     res.render('register', {
-        title: global.config.name
+        title: config.name
     });
 });
 
