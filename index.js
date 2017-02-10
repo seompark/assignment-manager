@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const logger = require('morgan');
 const updater = require('./src/updater');
 
 const path = require('path');
@@ -33,6 +33,7 @@ function uses(app) {
         resave: false,
         saveUninitialized: false
     }));
+    app.use(logger('common'));
 }
 
 function startServer(app) {
@@ -52,7 +53,11 @@ function useRouters(app) {
 }
 
 function listen(app) {
-    app.listen(app.get('port'), () => console.log('서버가 켜졌습니다.'));
+    if(process.env.NODE_ENV === 'production') {
+        app.listen(80, () => console.log(`서버가 80포트로 배포됩니다.`));
+    } else {
+        app.listen(app.get('port'), () => console.log('개발용 서버가 켜졌습니다.'));
+    }
 }
 
 function checkFolders() {
