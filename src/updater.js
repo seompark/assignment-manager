@@ -54,10 +54,14 @@ module.exports = () => {
         console.log('업데이트가 성공적으로 끝났습니다.');
         console.log('재실행해주세요.');
     });
-
+    
     updater.fire('check');
 };
 
 function printVersion(ver) {
     console.log(`Online Assignment Manager ver. ${ver}`);
+    console.log('Author: MuRye(박성민)');
+    console.log('Email: dreamaker7770@gmail.com');
+    console.log('Github: @110EIm');
+    console.log('Website: https://murye.io');
 }
