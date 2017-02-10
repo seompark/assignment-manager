@@ -20,7 +20,6 @@ module.exports = () => {
         printVersion(oldVersion);
         console.log('오래된 버전입니다. 자동 업데이트합니다');
         console.log(`새 버전 : ${newVersion}`);
-        //updater.fire('download-update');
         //TODO print changelogs
     });
 
@@ -42,19 +41,17 @@ module.exports = () => {
 
     updater.on('update.downloaded', () => {
         console.log('다운로드가 끝났습니다. 곧 설치가 시작됩니다.');
-        //updater.fire('extract');
     });
 
     updater.on('update.not-installed', () => {
         console.log('다운로드가 끝났습니다. 곧 설치가 시작됩니다.');
-        //updater.fire('extract');
     });
 
     updater.on('update.extracted', () => {
         console.log('업데이트가 성공적으로 끝났습니다.');
         console.log('재실행해주세요.');
     });
-    
+
     updater.fire('check');
 };
 
