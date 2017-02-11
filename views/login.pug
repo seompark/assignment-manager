@@ -1,1 +1,21 @@
 extends layout
+
+append body
+    .ui.middle.aligned.center.aligned.grid(style='height: 100%'): .column(style='max-width: 500px')
+        h2.ui.image.header
+            .content 로그인하세요
+        form.ui.large.form(action='#' method='POST')
+            .ui.padded.secondary.segment
+                .field: .ui.left.icon.input
+                    i.user.icon
+                    input(type='text' name='id' placeholder='학번')
+                .field: .ui.left.icon.input
+                    i.lock.icon
+                    input(type='password' name='password' placeholder='비밀번호')
+                .ui.fluid.large.teal.submit.button 로그인
+            .ui.error.message
+        .ui.message
+            a(href='/register') 회원가입
+
+append scripts
+    script(src='/resources/js/login.js')
