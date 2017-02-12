@@ -1,9 +1,7 @@
-extends layout
+extends page
 
-append body
-    .ui.middle.aligned.center.aligned.grid(style='height: 100%'): .column(style='max-width: 500px')
-        h2.ui.image.header
-            .content 로그인하세요
+append content
+    .ui.middle.aligned.center.aligned.grid#wrapper: .column
         form.ui.large.form(action='#' method='POST')
             .ui.padded.secondary.segment
                 .field: .ui.left.icon.input
@@ -16,6 +14,9 @@ append body
             .ui.error.message
         .ui.message
             a(href='/register') 회원가입
+
+append stylesheets
+    link(rel='stylesheet' type='text/css' href='/resources/css/login.css')
 
 append scripts
     script(src='/resources/js/login.js')
