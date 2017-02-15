@@ -5,7 +5,8 @@ $(document).ready(function() {
                 identifier: 'id',
                 rules: [
                     {
-                        type: 'integer[1000..99999]',
+                        type: 'regex',
+                        value: /^\d{4,5}$/,
                         prompt: '올바른 학번을 입력해주세요.'
                     },
                 ]

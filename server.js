@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const logger = require('morgan');
+const favicon = require('serve-favicon');
 const update = require('./src/updater');
 
 const path = require('path');
@@ -13,8 +14,6 @@ const login = require('./routes/login');
 const register = require('./routes/register');
 
 const config = require('./config');
-
-startServer(express());
 
 function setting(app) {
     app.set('views', path.join(__dirname, 'views'));
@@ -34,6 +33,7 @@ function uses(app) {
         saveUninitialized: false
     }));
     app.use(logger('common'));
+    app.use(favicon(__dirname + '/public/favicon.ico'));
     useRouters(app);
 }
 
@@ -67,10 +67,12 @@ function checkFolders() {
     try {
         fs.accessSync('./database');
         fs.accessSync('./database/files');
-        fs.accessSync('./database/user');
+        fs.accessSync('./database/users');
     } catch(err) {
         fs.mkdirSync('./database');
         fs.mkdirSync('./database/files');
-        fs.mkdirSync('./database/user');
+        fs.mkdirSync('./database/users');
     }
 }
+
+module.exports = startServer;
