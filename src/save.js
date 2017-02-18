@@ -1,11 +1,16 @@
 const sort = require('sort-json');
 const jsonfile = require('jsonfile');
 
-module.exports = (clazz, obj) => new Promise((resolve, reject) => {
+const pending = {};
+const busy = {};
+
+module.exports = (path, obj) => new Promise((resolve, reject) => {
+	busy[path] = obj;
 	obj = sort(obj);
-	jsonfile.writeFile(__dirname + `/database/users/${clazz}.json`, obj, { spaces: 2 }, (err) => {
+	jsonfile.writeFile(path, { spaces: 2 }, (err) => {
 		if(err)
 			return reject(err);
+		delete busy[obj];
 		resolve();
 	});
 });

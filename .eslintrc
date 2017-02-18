@@ -1,7 +1,7 @@
 {
     "parserOptions": {
         "ecmaVersion": 6,
-        "sourceType": "module",
+        "sourceType": "module"
     },
     "env": {
         "node": true,
@@ -13,19 +13,22 @@
     "rules": {
         "indent": [
             "error",
-            4, {
-                "SwitchCase": 1
-            }
+            "tab",
+            { "SwitchCase": 1 }
         ],
         "linebreak-style": [
-            "error", "unix"
+            "error",
+            "unix"
         ],
         "quotes": [
-            "error", "single", { "allowTemplateLiterals": true }
+            "error",
+            "single",
+            { "allowTemplateLiterals": true }
         ],
         "semi": [
-            "error", "always"
+            "error",
+            "always"
         ],
-        "no-console": 0,
+        "no-console": 0
     }
 }

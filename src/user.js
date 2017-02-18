@@ -1,71 +1,69 @@
+const store = require('./store').getInstance();
+
 class User {
-    constructor(id, password) {
-        if(id.length === 4)
-            id = id[0] + '0' + id.slice(1, 3);
-        this._id = id;
-        this._password = password;
-    }
-    static login(id, password) {
-        //TODO
-        return true;
-    }
+	constructor(id = '', password = '', name = '') {
+		this._id = this.canonicalizeId(id);
+		this._password = password;
+		this.name = name;
+	}
 
-    static register(id, password) {
-        return new Promise((resolve, reject) => {
-            let user = new User(id, password);
-            if(user.isRegistered())
-                reject(new Error('You are already registered'));
+	static login(id, password) {
+		let user = this.store.get(id);
+		let loginUser = new User(id, password);
+		return user.compare(loginUser);
+	}
 
-        });
-    }
+	register() {
+		return new Promise((resolve, reject) => {
+			if(this.isRegistered())
+				return reject(new Error('이미 회원가입한 사용자입니다.'));
+			if(!this.verifyId())
+				return reject(new Error('유효하지 않은 학번입니다.'));
+			if(!this.verifyPassword())
+				return reject(new Error('유효하지 않은 비밀번호입니다.'));
+			resolve(store.set(this.getFullId(), this));
+		});
+	}
 
-    static getStudents(clazz) {
-        try {
-            return require(__dirname + `/database/users/${clazz}.json`);
-        } catch(err) {
-            return undefined;
-        }
-    }
+	canonicalizeId(id) {
+		return id.length === 4 ? id[0] + '0' + id.slice(1, 4) : id;
+	}
 
-    makeUserFile(id) {
-        //TODO
-    }
+	verifyId() {
+		return !!this._id.match(/^\d{4,5}$/g);
+	}
 
-    save() {
-        //TODO
-    }
+	verifyPassword() {
+		return this._password.match(/^[^ \t\r\n\v\f]{4,20}$/g); // 공백 미포함 4글자 이상
+	}
 
-    verifyId() {
-        return this._id.match(/^\d{4,5}$/g);
-    }
+	getGrade() {
+		return this._id[0];
+	}
 
-    verifyPassword() {
-        //TODO throw Error if it can't be verified
-    }
+	getClass() {
+		return this.id[1] + this.id[2];
+	}
 
-    login() {
-        return this.isRegistered() ? this.verifyId() || this.verifyPassword() : false;
-    }
+	getFullId() {
+		return this._id;
+	}
 
-    getGrade() {
-        return this._id[0];
-    }
+	getPassword() {
+		return this._password;
+	}
 
-    getClass() {
-        return this.id[1] + this.id[2];
-    }
+	getName() {
+		return this.name;
+	}
 
-    getStudentNumber() {
-        return this._id;
-    }
+	isRegistered() {
+		return !!store.get(this._id);
+	}
 
-    isRegistered() {
-        try {
-            return !!require(`./database/users/${this.getGrade()}/${this.getClass()}.json`)[this.getStudentNumber()];
-        } catch(err) {
-            return false;
-        }
-    }
+	compare(user) {
+		return user.isRegistered() && user.getFullId() === this.getFullId() && user.getPassword() === this.getPassword();
+	}
 }
 
 module.exports = User;

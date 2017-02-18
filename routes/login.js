@@ -1,21 +1,25 @@
 const router = require('express').Router();
-const config = require('../config');
+const User = require('../src/user');
+const store = require('../src/store').getInstance();
 
 router.get('/', (req, res) => {
-    //if(req.session.auth)
-    //    return res.redirect('/');
-    res.render('login', {
-        title: config.name
-    });
+	if(req.session.auth)
+		return res.redirect('/');
+	res.render('login', {
+		title: '로그인'
+	});
 });
 
 router.post('/', (req, res) => {
-    let id = req.body.id,
-        pwd = req.body.password;
-    //TODO validate
-    //req.session.auth = true;
-    req.session.id = id;
-    res.redirect('/');
+	let user = new User(req.body.id, req.body.password);
+	if(store.get(user.getFullId(), new User()).compare(user)) {
+		req.session.auth = true;
+		req.session.id = req.body.id;
+		res.redirect('/');
+	} else {
+		//TODO flash
+		res.redirect('/login');
+	}
 });
 
 module.exports = router;
