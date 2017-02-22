@@ -1,1 +1,12 @@
 extends page
+
+append container
+	.ui.fixed.inverted.menu(style='background-color: white;box-shadow: rgba(125, 125, 125, 0.5) 0px 2px 4px')
+		.ui.container
+			.item.aligned.right(style='color: black') logout
+	//.ui.middle.aligned.center.aligned.grid(style='height: 100%'): .column()
+		.ui.padded.secondary.segment
+	.ui.middle.aligned.center.aligned.grid(style='height: 100%'): .column
+		form.dropzone(action='/upload', method='post', enctype='multipart/form-data')
+			
+				

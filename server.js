@@ -13,6 +13,7 @@ const index = require('./routes/index');
 const author = require('./routes/author');
 const login = require('./routes/login');
 const register = require('./routes/register');
+const upload = require('./routes/upload');
 
 const config = require('./config');
 
@@ -56,6 +57,7 @@ function useRouters(app) {
 	app.use('/author', author);
 	app.use('/login', login);
 	app.use('/register', register);
+	app.use('/upload', upload);
 }
 
 function listen(app) {

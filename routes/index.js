@@ -6,7 +6,9 @@ router.get('/', (req, res) => {
 		res.redirect('/login');
 		return;
 	}
-	res.render('index', {title: config.name});
+	res.render('index', {
+		title: config.name,
+	});
 });
 
 module.exports = router;

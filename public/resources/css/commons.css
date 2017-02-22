@@ -75,7 +75,7 @@
   100% { transform: rotate(360deg); transform: rotate(360deg); }
 }
 
-.content::before {
+#content::before {
     content: "";
     position: fixed;
     top: 0;
@@ -90,7 +90,7 @@
     height: 100%;
 }
 
-.content {
+#content {
     height: 100%;
     position: relative;
 }
