@@ -12,6 +12,7 @@ const fs = require('fs');
 const index = require('./routes/index');
 const author = require('./routes/author');
 const login = require('./routes/login');
+const logout = require('./routes/logout');
 const register = require('./routes/register');
 const upload = require('./routes/upload');
 
@@ -56,6 +57,7 @@ function useRouters(app) {
 	app.use('/', index);
 	app.use('/author', author);
 	app.use('/login', login);
+	app.use('/logout', logout);
 	app.use('/register', register);
 	app.use('/upload', upload);
 }
