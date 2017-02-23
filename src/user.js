@@ -45,6 +45,10 @@ class User {
 		return this.id[1] + this.id[2];
 	}
 
+	getNumber() {
+		return this.id[3] + this.id[4];
+	}
+
 	getFullId() {
 		return this._id;
 	}
@@ -63,6 +67,13 @@ class User {
 
 	compare(user) {
 		return user.isRegistered() && user.getFullId() === this.getFullId() && user.getPassword() === this.getPassword();
+	}
+
+	getData() {
+		return {
+			'이름': this.name,
+			'비밀번호': this.getPassword()
+		};
 	}
 }
 
