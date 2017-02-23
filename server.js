@@ -34,23 +34,13 @@ function uses(app) {
 		resave: false,
 		saveUninitialized: false,
 		store: new FileStore({
-			path: path.join(require('os').tmpdir(), 'sessions')
+			path: path.join(require('os').tmpdir(), 'sessions'),
+			logFn: () => true
 		})
 	}));
 	app.use(logger('common'));
 	app.use(favicon(__dirname + '/public/favicon.ico'));
 	useRouters(app);
-}
-
-function startServer(app) {
-	update().then(() => {
-		checkFolders();
-		setting(app);
-		uses(app);
-		listen(app);
-	}).catch((err) => {
-		console.log(err);
-	});
 }
 
 function useRouters(app) {
@@ -80,6 +70,18 @@ function checkFolders() {
 		fs.mkdirSync(path.join(__dirname, config.dataFolder, 'file'));
 		fs.mkdirSync(path.join(__dirname, config.dataFolder, 'user'));
 	}
+}
+
+function startServer(app) {
+	update().then(() => {
+		checkFolders();
+		setting(app);
+		uses(app);
+		listen(app);
+	}).catch((err) => {
+		console.log(err);
+		process.exit(1);
+	});
 }
 
 module.exports = startServer;
