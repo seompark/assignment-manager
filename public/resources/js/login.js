@@ -1,25 +1,49 @@
 $(document).ready(function() {
-	$('.ui.form').form({
-		fields: {
-			id: {
-				identifier: 'id',
-				rules: [
-					{
-						type: 'regExp',
-						value: /^\d{4,5}$/g,
-						prompt: '올바른 학번을 입력해주세요.'
-					},
-				]
-			},
-			password: {
-				identifier: 'password',
-				rules: [
-					{
-						type: 'empty',
-						prompt: '비밀번호를 입력해주세요'
-					}
-				]
+	$('.ui.form').api({
+		action: 'login',
+		method: 'POST',
+		beforeSend: function(setting) {
+			removeErrorMessages();
+			setting.data = $('.ui.form').form('get values');
+			//TODO validate
+			return setting;
+		},
+		onResponse: function(res) {
+			removeErrorMessages();
+			if(res.success) {
+				window.location = '/';
+			} else {
+				writeError('비밀번호가 일치하지 않습니다.');
 			}
 		}
 	});
+
+	function writeError(message) {
+		var elMessage = document.querySelector('.ui.error.message'),
+			form = document.querySelector('form.ui.large.form'),
+			li = document.createElement('li'),
+			ul = document.querySelector('ul.list') || document.createElement('ul');
+		ul.className = 'list';
+		li.textContent = message;
+		ul.appendChild(li);
+		elMessage.appendChild(ul);
+		setElementError([form]);
+	}
+
+	function setElementError(arr) {
+		arr.forEach(function(v) {
+			addErrorClass(v);
+		});
+	}
+
+	function addErrorClass(el) {
+		if(el && !el.className.match('error'))
+			el.className += ' error';
+	}
+
+	function removeErrorMessages() {
+		var ul = document.querySelector('ul.list');
+		if(ul)
+			ul.parentNode.removeChild(ul);
+	}
 });

@@ -1,7 +1,9 @@
-const store = require('./store').getInstance();
+const path = require('path');
+const config = require('../config');
 
 class User {
 	constructor(id = '', password = '', name = '') {
+		this.store = require('./store').getInstance();
 		this._id = this.canonicalizeId(id);
 		this._password = password;
 		this.name = name;
@@ -16,12 +18,12 @@ class User {
 	register() {
 		return new Promise((resolve, reject) => {
 			if(this.isRegistered())
-				return reject(new Error('이미 회원가입한 사용자입니다.'));
+				return reject({input:'id', message: '이미 회원가입한 사용자입니다.'});
 			if(!this.verifyId())
-				return reject(new Error('유효하지 않은 학번입니다.'));
+				return reject({input: 'id', message: '유효하지 않은 학번입니다.'});
 			if(!this.verifyPassword())
-				return reject(new Error('유효하지 않은 비밀번호입니다.'));
-			resolve(store.set(this.getFullId(), this));
+				return reject({input: 'password', message: '유효하지 않은 비밀번호입니다.'});
+			resolve(this.store.set(this.getFullId(), this));
 		});
 	}
 
@@ -30,7 +32,7 @@ class User {
 	}
 
 	verifyId() {
-		return !!this._id.match(/^\d{4,5}$/g);
+		return !!this._id.match(/^\d{4,5}$/g); // 정수 4-5자리
 	}
 
 	verifyPassword() {
@@ -42,11 +44,11 @@ class User {
 	}
 
 	getClass() {
-		return this.id[1] + this.id[2];
+		return this._id[1] + this._id[2];
 	}
 
 	getNumber() {
-		return this.id[3] + this.id[4];
+		return this._id[3] + this._id[4];
 	}
 
 	getFullId() {
@@ -62,7 +64,7 @@ class User {
 	}
 
 	isRegistered() {
-		return !!store.get(this._id);
+		return !!this.store.get(this._id);
 	}
 
 	compare(user) {
@@ -74,6 +76,10 @@ class User {
 			'이름': this.name,
 			'비밀번호': this.getPassword()
 		};
+	}
+
+	getFilePath() {
+		return path.resolve(__dirname, '..', config.dataFolder, 'file', this.getGrade(), this.getClass(), this.getName());
 	}
 }
 

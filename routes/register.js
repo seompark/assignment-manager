@@ -13,12 +13,14 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
 	let user = new User(req.body.id, req.body.password, req.body.name);
 	user.register().then(() => {
-		//TODO render register-done
-		res.redirect('/');
+		res.json({
+			success: true
+		});
 	}).catch((err) => {
-		//TODO show error
-		console.log(err);
-		res.redirect('/register');
+		res.json({
+			success: false,
+			error: err
+		});
 	});	
 });
 

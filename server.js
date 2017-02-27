@@ -4,6 +4,7 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const logger = require('morgan');
 const favicon = require('serve-favicon');
+const mkdirp = require('mkdirp');
 const update = require('./src/updater');
 
 const path = require('path');
@@ -61,15 +62,8 @@ function listen(app) {
 }
 
 function checkFolders() {
-	try {
-		fs.accessSync(path.join(__dirname, config.dataFolder));
-		fs.accessSync(path.join(__dirname, config.dataFolder, 'file'));
-		fs.accessSync(path.join(__dirname, config.dataFolder, 'user'));
-	} catch(err) {
-		fs.mkdirSync(path.join(__dirname, config.dataFolder));
-		fs.mkdirSync(path.join(__dirname, config.dataFolder, 'file'));
-		fs.mkdirSync(path.join(__dirname, config.dataFolder, 'user'));
-	}
+	mkdirp(path.join(__dirname, config.dataFolder, 'file'));
+	mkdirp(path.join(__dirname, config.dataFolder, 'user'));
 }
 
 function startServer(app) {

@@ -14,11 +14,10 @@ router.post('/', (req, res) => {
 	let user = new User(req.body.id, req.body.password);
 	if(store.get(user.getFullId(), new User()).compare(user)) {
 		req.session.auth = true;
-		req.session.id = req.body.id;
-		res.redirect('/');
+		req.session.uid = user.getFullId();
+		res.json({success: true});
 	} else {
-		//TODO flash
-		res.redirect('/login');
+		res.json({success: false});
 	}
 });
 

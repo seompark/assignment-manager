@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const config = require('../config');
+const store = require('../src/store').getInstance();
 
 router.get('/', (req, res) => {
 	if (!req.session.auth) {
@@ -8,6 +9,7 @@ router.get('/', (req, res) => {
 	}
 	res.render('index', {
 		title: config.name,
+		name: store.get(req.session.uid).getName()
 	});
 });
 
