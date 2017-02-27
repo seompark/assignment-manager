@@ -1,6 +1,7 @@
 const jsonfile = require('jsonfile');
 const path = require('path');
 const fs = require('fs');
+const mkdirp = require('mkdirp');
 const saveJSON = require('./save-json');
 const config = require('../config');
 const User = require('./user');
@@ -33,6 +34,8 @@ class Store {
 	}
 
 	loadAll() {
+		mkdirp.sync(path.join(this.sPath, 'file'));
+		mkdirp.sync(path.join(this.sPath, 'user'));
 		fs.readdirSync(path.resolve(this.sPath))
 			.forEach((i) => fs.readdirSync(path.join(this.sPath, '' + i))
 				.forEach((v) => this.load(i, v.replace('.json', '').replace('반', ''))));

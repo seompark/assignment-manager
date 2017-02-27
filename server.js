@@ -8,7 +8,6 @@ const mkdirp = require('mkdirp');
 const update = require('./src/updater');
 
 const path = require('path');
-const fs = require('fs');
 
 const index = require('./routes/index');
 const author = require('./routes/author');
